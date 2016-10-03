@@ -9,18 +9,6 @@
   [coll f]
   (update coll (dec (count coll)) f))
 
-
-(string/split
-  (string/replace (slurp "lyrics/lyrics.txt")
-                  #" ’]" "")
-  #"\n")
-
-(string/split
-  (string/replace (slurp "lyrics/lyrics.txt")
-                  #"’" "'")
-  #"\n")
-
-
 (->>
   (string/split
     (string/replace (slurp "lyrics/lyrics.txt")
@@ -86,14 +74,14 @@
   (map
     (fn [{:keys [lines number title]}]
       (hiccup/html
-        [:article {:class (string/replace number #"\." "")}
-         [:h1 number]
-         [:h2 title]
-         [:div {:class "lyrics"}
+        [:section {:class (format "lh-s-%s lh-article" (string/replace number #"\." ""))}
+         [:section.lh-number number]
+         [:section.lh-title title]
+         [:section.lh-lyrics
           (for [stanza lines]
-            [:section
+            [:section.lh-stanza
              (for [line stanza]
-               [:p line])])]])))
+               [:section.lh-line line])])]])))
 
   ;; write it out
   (string/join "")
