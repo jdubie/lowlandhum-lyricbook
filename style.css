@@ -1,0 +1,53 @@
+// hide default squarespace stuff
+.footer-inner { display: none; }
+footer { display: none; }
+#footer { display: none; }
+#header { display: none; }
+#preFooter { display: none; }
+#page { padding: 0; }
+#mobileNavToggle { display: none; }
+#overlayNav { display: none; }
+
+.articles {
+  display: none;
+}
+
+h1 {
+  color: #7C7D7D;
+  font-family: 'Roboto', sans-serif;
+  text-align: center;
+}
+
+h2 {
+  font-family: 'Cormorant Garamond', serif;
+  text-align: center;
+  font-size: 6vw;
+}
+
+section {
+  padding: 3vw 0;
+}
+
+p {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 4vw;
+  margin: 0;
+}
+
+input[type='text'],
+input[type='number'] {
+  /* font-size: 4vw; */
+  font-size: 16px;
+}
+
+.wrapper {
+  padding: 6vw;
+
+  background:
+    url(data:image/png;base64,__BACKGROUND_IMAGE_B64__)
+    no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}

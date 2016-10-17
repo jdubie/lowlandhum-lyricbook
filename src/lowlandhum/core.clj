@@ -1,7 +1,11 @@
 (ns lowlandhum.core
   (:require
     [clojure.string :as string]
-    [hiccup.core :as hiccup]))
+    [hiccup.core :as hiccup]
+    [clojure.java.io :as io])
+  (:import
+    [java.util Base64]
+    [java.io ByteArrayOutputStream]))
 
 (def num-re #"[0-9]+\.")
 
@@ -9,99 +13,133 @@
   [coll f]
   (update coll (dec (count coll)) f))
 
-(->>
-  (string/split
-    (string/replace (slurp "lyrics/lyrics.txt")
-                    #"’" "'")
-    #"\n")
+(defn slurp-bytes
+  "Slurp the bytes from a slurpable thing"
+  [x]
+  (with-open [out (ByteArrayOutputStream.)]
+    (clojure.java.io/copy (io/input-stream x) out)
+    (.toByteArray out)))
 
-  ;; trim
-  (map string/trim)
+(defn pbcopy
+  "Copies pretty-printed string to clipboard"
+  [s]
+  (let [p (.. (Runtime/getRuntime) (exec "pbcopy"))
+        o (clojure.java.io/writer (.getOutputStream p))]
+    (binding [*out* o] (spit o s))
+    (.close o)
+    (.waitFor p)))
 
-  ;; turn into song datastructure
-  (reduce
-    (fn [memo elem]
-      (cond
-        ;; line number
-        (re-matches num-re elem)
-        (conj memo {:number elem})
+(defn lyrics-html
+  []
+  (->>
+    (string/split
+      (string/replace (slurp "lyrics/lyrics.txt")
+                      #"’" "'")
+      #"\n")
 
-        ;; title
-        (and (not-empty memo)
-             (not (some? (:title (last memo)))))
-        (update-last memo #(assoc % :title elem))
+    ;; trim
+    (map string/trim)
 
-        ;; lyrics
-        (and (not-empty memo)
-             (some? (:title (last memo))))
-        (update-last memo #(update % :lines (fn [lines] (conj (or lines []) elem))))
+    ;; turn into song datastructure
+    (reduce
+      (fn [memo elem]
+        (cond
+          ;; line number
+          (re-matches num-re elem)
+          (conj memo {:number elem})
 
-        ;:else
-        :else memo))
-    [])
+          ;; title
+          (and (not-empty memo)
+               (not (some? (:title (last memo)))))
+          (update-last memo #(assoc % :title elem))
 
-  ;; get rid of leading whitespace
-  (map
-    (fn [{:keys [lines] :as song}]
-      (assoc
-        song
-        :lines
-        (loop [lines lines]
-          (if (not= "" (first lines))
-            lines
-            (recur (vec (rest lines))))))))
+          ;; lyrics
+          (and (not-empty memo)
+               (some? (:title (last memo))))
+          (update-last memo #(update % :lines (fn [lines] (conj (or lines []) elem))))
 
-  ;; get rid of trailing whitespace
-  (map
-    (fn [{:keys [lines] :as song}]
-      (assoc
-        song
-        :lines
-        (loop [lines lines]
-          (if (not= "" (last lines))
-            lines
-            (recur (pop lines)))))))
+          ;:else
+          :else memo))
+      [])
 
-  ;; split stanzas
-  (map
-    (fn [{:keys [lines] :as song}]
-      (assoc song :lines
-        (mapv
-          #(string/split % #"\n")
-          (string/split (string/join "\n" lines) #"\n\n")))))
+    ;; get rid of leading whitespace
+    (map
+      (fn [{:keys [lines] :as song}]
+        (assoc
+          song
+          :lines
+          (loop [lines lines]
+            (if (not= "" (first lines))
+              lines
+              (recur (vec (rest lines))))))))
 
-  ;; render
-  (map
-    (fn [{:keys [lines number title]}]
-      (hiccup/html
-        [:section {:class (format "lh-s-%s lh-article" (string/replace number #"\." ""))}
-         [:section.lh-number number]
-         [:section.lh-title title]
-         [:section.lh-lyrics
-          (for [stanza lines]
-            [:section.lh-stanza
-             (for [line stanza]
-               [:section.lh-line line])])]])))
+    ;; get rid of trailing whitespace
+    (map
+      (fn [{:keys [lines] :as song}]
+        (assoc
+          song
+          :lines
+          (loop [lines lines]
+            (if (not= "" (last lines))
+              lines
+              (recur (pop lines)))))))
 
-  ;; write it out
-  (string/join "")
-  (spit "lyrics.html"))
+    ;; split stanzas
+    (map
+      (fn [{:keys [lines] :as song}]
+        (assoc song :lines
+          (mapv
+            #(string/split % #"\n")
+            (string/split (string/join "\n" lines) #"\n\n")))))
 
+    ;; render
+    (map
+      (fn [{:keys [lines number title]}]
+        (hiccup/html
+          [:article {:class (format "a-%s" (string/replace number #"\." ""))}
+           [:h1 number]
+           [:h2 title]
+           [:div
+            (for [stanza lines]
+              [:section
+               (for [line stanza]
+                 [:p line])])]])))
 
-(hiccup/html
-  [:div])
+    ;; write it out
+    (string/join "")))
 
-(update-last
- [{:number "33."}
-  {:number "34."}
-  {:number "35."}
-  {:number "36."}
-  {:number "37."}
-  {:number "38."}
-  {:number "39."}
-  {:number "40."}]
- #(assoc % :foo :bar))
+(defn gen-html
+  []
+  (string/join
+    ["<meta name='viewport' content='width=device-width, initial-scale=1.0'>"
+     "<link href=\"https://fonts.googleapis.com/css?family=Cormorant+Garamond|Roboto\" rel=\"stylesheet\">"
+     (format "<style>%s</style>" (slurp "reset.css"))
+     (as-> (slurp "style.css") $
+           (string/replace $ #"__BACKGROUND_IMAGE_B64__"
+                           (.encodeToString (Base64/getEncoder) (slurp-bytes "img/background.png")))
+           (format "<style>%s</style>" $))
+     (format "<div class='wrapper'>%s<main class='main'></main></div><div class=\"articles\">%s</div>"
+             (slurp "header.html") (lyrics-html))
+     (format "<script>%s</script>" (slurp "app.js"))]))
 
-(rest
-  [""
-   "foo"])
+(comment
+  (pbcopy (gen-html))
+  (spit "index.html" (gen-html))
+
+  (hiccup/html
+    [:div])
+
+  (update-last
+   [{:number "33."}
+    {:number "34."}
+    {:number "35."}
+    {:number "36."}
+    {:number "37."}
+    {:number "38."}
+    {:number "39."}
+    {:number "40."}]
+   #(assoc % :foo :bar))
+
+  (rest
+    [""
+     "foo"]))

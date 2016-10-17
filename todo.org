@@ -1,0 +1,2 @@
+- [ ] style song number input
+- [ ] background image extends to the button on short pages
