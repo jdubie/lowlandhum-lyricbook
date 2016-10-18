@@ -113,18 +113,22 @@
   (string/join
     ["<meta name='viewport' content='width=device-width, initial-scale=1.0'>"
      "<link href=\"https://fonts.googleapis.com/css?family=Cormorant+Garamond|Roboto\" rel=\"stylesheet\">"
-     (format "<style>%s</style>" (slurp "reset.css"))
-     (as-> (slurp "style.css") $
+     (format "<style>%s</style>" (slurp "src/web/reset.css"))
+     (as-> (slurp "src/web/style.css") $
            (string/replace $ #"__BACKGROUND_IMAGE_B64__"
                            (.encodeToString (Base64/getEncoder) (slurp-bytes "img/background.png")))
            (format "<style>%s</style>" $))
      (format "<div class='wrapper'>%s<main class='main'></main></div><div class=\"articles\">%s</div>"
-             (slurp "header.html") (lyrics-html))
-     (format "<script>%s</script>" (slurp "app.js"))]))
+             (slurp "src/web/header.html") (lyrics-html))
+     (format "<script>%s</script>" (slurp "src/web/app.js"))]))
+
+(defn build
+  []
+  (println (format "[%d] building..." (System/currentTimeMillis)))
+  (pbcopy (gen-html))
+  (spit "index.html" (gen-html)))
 
 (comment
-  (pbcopy (gen-html))
-  (spit "index.html" (gen-html))
 
   (hiccup/html
     [:div])

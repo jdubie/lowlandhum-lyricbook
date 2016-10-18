@@ -34,15 +34,11 @@ p {
   margin: 0;
 }
 
-input[type='text'],
-input[type='number'] {
-  /* font-size: 4vw; */
-  font-size: 16px;
-}
-
 .wrapper {
   padding: 6vw;
+}
 
+html {
   background:
     url(data:image/png;base64,__BACKGROUND_IMAGE_B64__)
     no-repeat center center fixed;
@@ -50,4 +46,34 @@ input[type='number'] {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+header form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+header form input {
+  height: 35px;
+  -webkit-appearance: none;
+}
+
+input[name=songNumber] {
+  width: 10vw;
+  text-align: center;
+  border: 1px solid #7C7D7D;
+  font-size: 16px; /* this prevents phone zooming in */
+}
+
+input[type=submit] {
+  background-color: white;
+  border: 1px solid #7C7D7D;
 }
