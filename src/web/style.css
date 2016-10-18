@@ -7,15 +7,28 @@ footer { display: none; }
 #page { padding: 0; }
 #mobileNavToggle { display: none; }
 #overlayNav { display: none; }
+/* .yui3-widget, .sqs-widget, .sqs-announcement-bar { display: none; } */
 
 .articles {
   display: none;
 }
 
+.title-wrapper {
+  position: relative;
+  margin-top: 50px;
+  margin-bottom: 30px;
+}
+
 h1 {
+  position: absolute;
   color: #7C7D7D;
   font-family: 'Roboto', sans-serif;
   text-align: center;
+  z-index: -1;
+  left: 0;
+  right: 0;
+  font-size: 15vw;
+  top: -4.5vw;
 }
 
 h2 {
@@ -30,12 +43,13 @@ section {
 
 p {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 4vw;
+  font-size: 5vw;
+  line-height: 5.8vw;
   margin: 0;
 }
 
 .wrapper {
-  padding: 6vw;
+  padding: 8vw;
 }
 
 html {

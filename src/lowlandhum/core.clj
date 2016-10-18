@@ -46,7 +46,7 @@
         (cond
           ;; line number
           (re-matches num-re elem)
-          (conj memo {:number elem})
+          (conj memo {:number (string/replace elem #"\." "")})
 
           ;; title
           (and (not-empty memo)
@@ -96,9 +96,11 @@
     (map
       (fn [{:keys [lines number title]}]
         (hiccup/html
-          [:article {:class (format "a-%s" (string/replace number #"\." ""))}
-           [:h1 number]
-           [:h2 title]
+          [:article {:class (format "a-%s" number)}
+
+           [:div.title-wrapper
+             [:h1 number]
+             [:h2 title]]
            [:div
             (for [stanza lines]
               [:section

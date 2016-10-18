@@ -1,2 +1,4 @@
-- [ ] style song number input
-- [ ] background image extends to the button on short pages
+- [x] style song number input
+- [x] background image extends to the button on short pages
+- [x] style number image
+- [ ] remove all HTML but ours
