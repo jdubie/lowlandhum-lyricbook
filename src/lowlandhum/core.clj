@@ -113,16 +113,18 @@
 (defn gen-html
   []
   (string/join
-    ["<meta name='viewport' content='width=device-width, initial-scale=1.0'>"
-     "<link href=\"https://fonts.googleapis.com/css?family=Cormorant+Garamond|Roboto\" rel=\"stylesheet\">"
-     (format "<style>%s</style>" (slurp "src/web/reset.css"))
+    ["<meta class='lh' name='viewport' content='width=device-width, initial-scale=1.0'>"
+     "<link class='lh' href=\"https://fonts.googleapis.com/css?family=Cormorant+Garamond|Roboto\" rel=\"stylesheet\">"
+     "<div><div>"
+     (format "<style class='lh'>%s</style>" (slurp "src/web/reset.css"))
      (as-> (slurp "src/web/style.css") $
            (string/replace $ #"__BACKGROUND_IMAGE_B64__"
                            (.encodeToString (Base64/getEncoder) (slurp-bytes "img/background.png")))
-           (format "<style>%s</style>" $))
-     (format "<div class='wrapper'>%s<main class='main'></main></div><div class=\"articles\">%s</div>"
+           (format "<style class='lh'>%s</style>" $))
+     (format "<div class='lh wrapper'>%s<main class='main'></main><div class=\"articles\">%s</div></div>"
              (slurp "src/web/header.html") (lyrics-html))
-     (format "<script>%s</script>" (slurp "src/web/app.js"))]))
+     (format "<script class='lh'>%s</script>" (slurp "src/web/app.js"))
+     "</div></div>"]))
 
 (defn build
   []
@@ -131,6 +133,9 @@
   (spit "index.html" (gen-html)))
 
 (comment
+
+  (pbcopy (gen-html))
+  (spit "index.html" (gen-html))
 
   (hiccup/html
     [:div])

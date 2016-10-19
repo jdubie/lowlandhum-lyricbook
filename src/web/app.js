@@ -1,9 +1,20 @@
-/* reset squarespace css */
-for (var i in document.styleSheets) {
-    var sheet = document.styleSheets[i];
-    if (sheet && sheet.href && sheet.href.match("squarespace")) {
-        sheet.disabled = true
-    }
+function unsquarespace() {
+  // wipe css
+  for (var i in document.styleSheets) {
+      var sheet = document.styleSheets[i];
+      if (sheet && sheet.href && sheet.href.match("squarespace")) {
+          sheet.disabled = true
+      }
+  }
+
+  // content
+  var lhNodes = Array.prototype.slice.call(document.getElementsByClassName('lh'));
+  while (document.body.hasChildNodes()) {
+    document.body.removeChild(document.body.lastChild);
+  }
+  for (var i = 0; i < lhNodes.length; i++) {
+    document.body.appendChild(lhNodes[i]);
+  }
 }
 
 // state
@@ -53,3 +64,8 @@ textInput.onkeyup = function (e) {
 
 // start on first page
 displaySong(curSong);
+
+unsquarespace();
+document.addEventListener("DOMContentLoaded", function(event) {
+  unsquarespace();
+});

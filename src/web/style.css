@@ -1,22 +1,10 @@
-// hide default squarespace stuff
-.footer-inner { display: none; }
-footer { display: none; }
-#footer { display: none; }
-#header { display: none; }
-#preFooter { display: none; }
-#page { padding: 0; }
-#mobileNavToggle { display: none; }
-#overlayNav { display: none; }
-/* .yui3-widget, .sqs-widget, .sqs-announcement-bar { display: none; } */
-
 .articles {
   display: none;
 }
 
 .title-wrapper {
   position: relative;
-  margin-top: 50px;
-  margin-bottom: 30px;
+  margin-top: 10vw;
 }
 
 h1 {
@@ -29,6 +17,7 @@ h1 {
   right: 0;
   font-size: 15vw;
   top: -4.5vw;
+  /* top: -17.5vw; */
 }
 
 h2 {
@@ -66,7 +55,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 30px;
+  margin-bottom: 8vw;
 }
 
 header form {
@@ -81,7 +70,7 @@ header form input {
 }
 
 input[name=songNumber] {
-  width: 10vw;
+  width: 40px;
   text-align: center;
   border: 1px solid #7C7D7D;
   font-size: 16px; /* this prevents phone zooming in */
