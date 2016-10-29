@@ -134,6 +134,8 @@
 
 (comment
 
+  (user/go)
+
   (pbcopy (gen-html))
   (spit "index.html" (gen-html))
 

@@ -1,4 +1,8 @@
 - [x] style song number input
 - [x] background image extends to the button on short pages
 - [x] style number image
-- [ ] remove all HTML but ours
+- [x] remove all HTML but ours
+- [ ] add background image
+- [ ] add title, content, and credits page
+- [ ] https://css-tricks.com/the-javascript-behind-touch-friendly-sliders/
+- [ ] expirement with pagination
