@@ -138,7 +138,7 @@
                            (format "<li><div>%s</div><div class=\"toc-title\">%s</div></li>" number title)))
                     (split-at (int (/ (count entries) 2)))
                     (map #(string/join "" %)))]
-               (format "<div class=\"a--1 toc\"><h1>Contents</h1><div class=\"contents\"><ul>%s</ul><ul>%s</ul></div>%s</div>"
+               (format "<div class=\"a--1 toc spread\"><h1>Contents</h1><div class=\"contents\"><ul>%s</ul><ul>%s</ul></div>%s</div>"
                        left right
                        "<p>Click the box above to enter the number of the song you would like to view.</p>"))
              (slurp "src/web/credits.html")

@@ -5,6 +5,12 @@
 article {
   padding-left: 5vw;
   padding-right: 2vw;
+
+  /* scrolling */
+  height: 100%;
+  overflow-y: scroll;
+  overflow-x: scroll;
+  -webkit-overflow-scrolling: touch;
 }
 
 article .title-wrapper {
@@ -43,6 +49,22 @@ article p {
 }
 
 /* -------------------------------------------------------------------------------- */
+/* Content page comment */
+/* -------------------------------------------------------------------------------- */
+
+.spread {
+  display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+  display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;      /* TWEENER - IE 10 */
+  display: -webkit-flex;     /* NEW - Chrome */
+  display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
+
+  flex-direction: column;
+  justify-content: space-around;
+  height: 100%;
+}
+
+/* -------------------------------------------------------------------------------- */
 /* Title */
 /* -------------------------------------------------------------------------------- */
 
@@ -61,7 +83,7 @@ article p {
   letter-spacing: 0vw;
   font-size: 17vw;
   line-height: 11vw;
-  font-weight: 900;
+  font-weight: bold;
 }
 
 .title .title-wrapper h4 {
@@ -69,13 +91,8 @@ article p {
 }
 
 .title .instructions {
-  margin-top: 25vw;
   font-size: 5vw;
   font-weight: bold;
-}
-
-.title .footer {
-  margin-top: 18vw;
 }
 
 .title .footer h3 {
@@ -96,7 +113,6 @@ article p {
   text-transform: uppercase;
   letter-spacing: 2vw;
   font-weight: bold;
-  padding-bottom: 5vw;
 }
 
 .toc .contents {
@@ -125,16 +141,16 @@ article p {
   padding-left: 1vw;
 }
 
-.toc p {
-  margin-top: 8vw;
-}
-
 /* -------------------------------------------------------------------------------- */
 /* Credits */
 /* -------------------------------------------------------------------------------- */
 
+.credits {
+  margin-top: 5vw;
+}
+
 .credits p {
-  font-size: 4vw;
+  font-size: 3.5vw;
   font-family: 'Cormorant Garamond', serif;
 }
 
@@ -146,17 +162,12 @@ article p {
   display: none;
 }
 
-.wrapper {
-  padding: 4vw;
-}
-
-main {
-  padding-left: 14vw;
-
-  /* scrolling */
-  overflow-y: scroll;
-  overflow-x: scroll;
-  -webkit-overflow-scrolling: touch;
+main { /* try to target css image background */
+  /* background-color: rgba(255,0,0, 0.5); */
+  margin-top: 13%;
+  height: 82%;
+  margin-left: 18%;
+  margin-right: 4%;
 }
 
 html {
@@ -174,16 +185,15 @@ html {
 /* -------------------------------------------------------------------------------- */
 
 header {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 8vw;
+  padding-top: 4vw;
+  text-align: center;
+  position: fixed;
+  margin: 0 auto;
+  width: 100%;
+  top: 0;
 }
 
 header form {
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 header form input {

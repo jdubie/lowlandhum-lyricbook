@@ -7,5 +7,5 @@
 - [x] title page
 - [x] credits page
 - [x] table of contents page
-- [ ] bug: swipe after navigate doesn't work
+- [x] bug: swipe after navigate doesn't work
 - [ ] bug: fix weird characters

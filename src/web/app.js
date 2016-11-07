@@ -19,9 +19,6 @@ function unsquarespace() {
   for (var i = 0; i < lhNodes.length; i++) {
     document.body.appendChild(lhNodes[i]);
   }
-
-  // HACK update height for scrolling
-  document.getElementsByClassName('main')[0].style.height = (window.innerHeight * 0.70) + "px";
 }
 
 // ------------------------------------------------------------------------------
