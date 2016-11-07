@@ -45,6 +45,11 @@ table {
 /* Article */
 /* -------------------------------------------------------------------------------- */
 
+article {
+  padding-left: 5vw;
+  padding-right: 2vw;
+}
+
 article .title-wrapper {
   position: relative;
   margin-top: 4vw;
@@ -97,8 +102,8 @@ article p {
 .title .title-wrapper h1 {
   text-transform: uppercase;
   letter-spacing: 0vw;
-  font-size: 13vw;
-  line-height: 8vw;
+  font-size: 17vw;
+  line-height: 11vw;
   font-weight: 900;
 }
 
@@ -107,8 +112,8 @@ article p {
 }
 
 .title .instructions {
-  margin-top: 20vw;
-  font-size: 6vw;
+  margin-top: 25vw;
+  font-size: 5vw;
   font-weight: bold;
 }
 
@@ -122,11 +127,57 @@ article p {
 }
 
 /* -------------------------------------------------------------------------------- */
+/* Table of Content */
+/* -------------------------------------------------------------------------------- */
+
+.toc {
+  font-family: 'Cormorant Garamond', serif;
+}
+
+.toc h1 {
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 2vw;
+  font-weight: bold;
+  padding-bottom: 5vw;
+}
+
+.toc .contents {
+  display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+  display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;      /* TWEENER - IE 10 */
+  display: -webkit-flex;     /* NEW - Chrome */
+  display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
+}
+
+.toc ul {
+  text-align: left;
+  font-size: 3.2vw;
+  line-height: 3.9vw;
+}
+
+.toc ul li {
+  display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+  display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;      /* TWEENER - IE 10 */
+  display: -webkit-flex;     /* NEW - Chrome */
+  display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
+}
+
+.toc ul li .toc-title {
+  padding-left: 1vw;
+}
+
+.toc p {
+  margin-top: 8vw;
+}
+
+/* -------------------------------------------------------------------------------- */
 /* Credits */
 /* -------------------------------------------------------------------------------- */
 
 .credits p {
-  font-size: 3.5vw;
+  font-size: 4vw;
   font-family: 'Cormorant Garamond', serif;
 }
 
@@ -143,12 +194,9 @@ article p {
 }
 
 main {
-  padding-left: 21vw;
-  padding-right: 10vw;
+  padding-left: 14vw;
 
   /* scrolling */
-  /*height: 75%; */
-  /*height: 400px; */
   overflow-y: scroll;
   overflow-x: scroll;
   -webkit-overflow-scrolling: touch;
@@ -201,7 +249,6 @@ input[name=songNumber] {
         <input name="songNumber" type="text" value="1" pattern="[0-9]*">
     </form>
 </header><main class='main'></main><div class="articles"><div class="a--2 title">
-    <h1>Contents</h1>
     <div class="title-wrapper">
         <h1>These</h1>
         <h1>are  the</h1>
@@ -215,23 +262,7 @@ input[name=songNumber] {
         <h3>Lowland Hum</h3>
         <h6>2017</h6>
     </div>
-</div>
-<div class="a--1 title">
-    <div class="title-wrapper">
-        <h1>Table</h1>
-        <h1>of</h1>
-        <h1>contents</h1>
-        <h4>volume 5</h4>
-    </div>
-    <div class="instructions">
-        <p>Click on the little box above to enter the number of song you would like to view. Or turn the page to see the table of contents.</p>
-    </div>
-    <div class="footer">
-        <h3>Lowland Hum</h3>
-        <h6>2017</h6>
-    </div>
-</div>
-<div class="a-0 credits">
+</div><div class="a--1 toc"><h1>Contents</h1><div class="contents"><ul><li><div>0</div><div class="toc-title">Credits</div></li><li><div>1</div><div class="toc-title">BALLAD OF SAUDADE</div></li><li><div>2</div><div class="toc-title">BROTHER STRANGER</div></li><li><div>3</div><div class="toc-title">BLUE TO BLACK</div></li><li><div>4</div><div class="toc-title">FIFTY-SEVEN</div></li><li><div>5</div><div class="toc-title">WAR IS OVER</div></li><li><div>6</div><div class="toc-title">WHEN THE WORLD SLEEPS</div></li><li><div>7</div><div class="toc-title">TWINE</div></li><li><div>8</div><div class="toc-title">ALBATROSS</div></li><li><div>9</div><div class="toc-title">POCKET KNIFE</div></li><li><div>10</div><div class="toc-title">WHITE STONE</div></li><li><div>11</div><div class="toc-title">LINENS</div></li><li><div>12</div><div class="toc-title">MY HOUSE IS EMPTY</div></li><li><div>13</div><div class="toc-title">NOISE OF DAY</div></li><li><div>14</div><div class="toc-title">HOW LONG</div></li><li><div>15</div><div class="toc-title">FOUR SISTERS (PART ONE)</div></li><li><div>16</div><div class="toc-title">FOUR SISTERS (PART TWO)</div></li><li><div>17</div><div class="toc-title">FOUR SISTERS (PART THREE)</div></li><li><div>18</div><div class="toc-title">ODELL</div></li><li><div>19</div><div class="toc-title">OLIVIA</div></li></ul><ul><li><div>20</div><div class="toc-title">CHARLESTON</div></li><li><div>21</div><div class="toc-title">JACK OF HEARTS</div></li><li><div>22</div><div class="toc-title">1999</div></li><li><div>23</div><div class="toc-title">OLDER, WISER</div></li><li><div>24</div><div class="toc-title">FOLD</div></li><li><div>25</div><div class="toc-title">LAUTREC</div></li><li><div>26</div><div class="toc-title">NIGHTDRIVING</div></li><li><div>27</div><div class="toc-title">ROLLING AND ROLLING</div></li><li><div>28</div><div class="toc-title">MORNING MEAL</div></li><li><div>29</div><div class="toc-title">UNDER THE RUB</div></li><li><div>30</div><div class="toc-title">PALM LINES</div></li><li><div>31</div><div class="toc-title">ADONAI</div></li><li><div>32</div><div class="toc-title">IN FLIGHT</div></li><li><div>33</div><div class="toc-title">COMPASS</div></li><li><div>34</div><div class="toc-title">FAMILY TREE</div></li><li><div>35</div><div class="toc-title">VEDAUWOO</div></li><li><div>36</div><div class="toc-title">FOLDED FLOWERS</div></li><li><div>37</div><div class="toc-title">THIN PLACES</div></li><li><div>38</div><div class="toc-title">SOMEONE TO CHANGE MY MIND</div></li><li><div>39</div><div class="toc-title">WINTER GRASS</div></li><li><div>40</div><div class="toc-title">YESTERDAY IS FOREVER</div></li></ul></div><p>Click the box above to enter the number of the song you would like to view.</p></div><div class="a-0 credits">
     <p>Lowland Hum is Daniel and Lauren Goans.</p>
     <br/>
     <p>These Are The Words - vol. 5 <i>DIGITAL</i> was built for Lowland Hum by Jack Dubie.</p>
@@ -283,8 +314,7 @@ function unsquarespace() {
 // ------------------------------------------------------------------------------
 
 // state
-var curSong = 0;
-//var curSong = -2;
+var curSong = -2;
 
 function displaySong(songNumber) {
   console.log('displaySong', songNumber)

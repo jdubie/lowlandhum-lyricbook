@@ -29,7 +29,7 @@
     (.close o)
     (.waitFor p)))
 
-(defn lyrics-html
+(defn lyrics-content
   []
   (->>
     (string/split
@@ -88,9 +88,14 @@
     (map
       (fn [{:keys [lines] :as song}]
         (assoc song :lines
-          (mapv
-            #(string/split % #"\n")
-            (string/split (string/join "\n" lines) #"\n\n")))))
+                    (mapv
+                      #(string/split % #"\n")
+                      (string/split (string/join "\n" lines) #"\n\n")))))))
+
+(defn lyrics-html
+  []
+  (->>
+    (lyrics-content)
 
     ;; render
     (map
@@ -124,7 +129,18 @@
      (format "<div class='lh wrapper'>%s<main class='main'></main><div class=\"articles\">%s%s%s%s</div></div>"
              (slurp "src/web/header.html")
              (slurp "src/web/title.html")
-             (slurp "src/web/toc.html")
+             (let [entries (cons {:number "0" :title "Credits"} (lyrics-content))
+                   [left right]
+                   (->>
+                     entries
+                    (map #(select-keys % [:number :title]))
+                    (map (fn [{:keys [title number]}]
+                           (format "<li><div>%s</div><div class=\"toc-title\">%s</div></li>" number title)))
+                    (split-at (int (/ (count entries) 2)))
+                    (map #(string/join "" %)))]
+               (format "<div class=\"a--1 toc\"><h1>Contents</h1><div class=\"contents\"><ul>%s</ul><ul>%s</ul></div>%s</div>"
+                       left right
+                       "<p>Click the box above to enter the number of the song you would like to view.</p>"))
              (slurp "src/web/credits.html")
              (lyrics-html))
      (format "<script class='lh'>%s</script>" (slurp "src/web/app.js"))
@@ -138,6 +154,7 @@
 
 (comment
 
+  (lyrics-content)
   (lyrics-html)
 
   (user/go)

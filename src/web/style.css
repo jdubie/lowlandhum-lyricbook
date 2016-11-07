@@ -2,6 +2,11 @@
 /* Article */
 /* -------------------------------------------------------------------------------- */
 
+article {
+  padding-left: 5vw;
+  padding-right: 2vw;
+}
+
 article .title-wrapper {
   position: relative;
   margin-top: 4vw;
@@ -54,8 +59,8 @@ article p {
 .title .title-wrapper h1 {
   text-transform: uppercase;
   letter-spacing: 0vw;
-  font-size: 13vw;
-  line-height: 8vw;
+  font-size: 17vw;
+  line-height: 11vw;
   font-weight: 900;
 }
 
@@ -64,8 +69,8 @@ article p {
 }
 
 .title .instructions {
-  margin-top: 20vw;
-  font-size: 6vw;
+  margin-top: 25vw;
+  font-size: 5vw;
   font-weight: bold;
 }
 
@@ -79,11 +84,57 @@ article p {
 }
 
 /* -------------------------------------------------------------------------------- */
+/* Table of Content */
+/* -------------------------------------------------------------------------------- */
+
+.toc {
+  font-family: 'Cormorant Garamond', serif;
+}
+
+.toc h1 {
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 2vw;
+  font-weight: bold;
+  padding-bottom: 5vw;
+}
+
+.toc .contents {
+  display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+  display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;      /* TWEENER - IE 10 */
+  display: -webkit-flex;     /* NEW - Chrome */
+  display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
+}
+
+.toc ul {
+  text-align: left;
+  font-size: 3.2vw;
+  line-height: 3.9vw;
+}
+
+.toc ul li {
+  display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+  display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;      /* TWEENER - IE 10 */
+  display: -webkit-flex;     /* NEW - Chrome */
+  display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
+}
+
+.toc ul li .toc-title {
+  padding-left: 1vw;
+}
+
+.toc p {
+  margin-top: 8vw;
+}
+
+/* -------------------------------------------------------------------------------- */
 /* Credits */
 /* -------------------------------------------------------------------------------- */
 
 .credits p {
-  font-size: 3.5vw;
+  font-size: 4vw;
   font-family: 'Cormorant Garamond', serif;
 }
 
@@ -100,12 +151,9 @@ article p {
 }
 
 main {
-  padding-left: 21vw;
-  padding-right: 10vw;
+  padding-left: 14vw;
 
   /* scrolling */
-  /*height: 75%; */
-  /*height: 400px; */
   overflow-y: scroll;
   overflow-x: scroll;
   -webkit-overflow-scrolling: touch;

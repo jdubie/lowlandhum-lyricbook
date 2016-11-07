@@ -6,6 +6,6 @@
 - [x] add scrolling between pages
 - [x] title page
 - [x] credits page
-- [ ] table of contents page
+- [x] table of contents page
 - [ ] bug: swipe after navigate doesn't work
 - [ ] bug: fix weird characters

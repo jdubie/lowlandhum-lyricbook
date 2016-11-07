@@ -29,8 +29,7 @@ function unsquarespace() {
 // ------------------------------------------------------------------------------
 
 // state
-var curSong = 0;
-//var curSong = -2;
+var curSong = -2;
 
 function displaySong(songNumber) {
   console.log('displaySong', songNumber)
