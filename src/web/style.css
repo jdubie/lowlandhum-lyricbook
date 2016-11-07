@@ -1,13 +1,13 @@
-.articles {
-  display: none;
-}
+/* -------------------------------------------------------------------------------- */
+/* Article */
+/* -------------------------------------------------------------------------------- */
 
-.title-wrapper {
+article .title-wrapper {
   position: relative;
-  margin-top: 10vw;
+  margin-top: 4vw;
 }
 
-h1 {
+article h1 {
   position: absolute;
   color: #C4C1C0;
   font-family: 'Roboto', sans-serif;
@@ -20,25 +20,95 @@ h1 {
   /* top: -17.5vw; */
 }
 
-h2 {
+article h2 {
   font-family: 'Cormorant Garamond', serif;
   text-align: center;
   font-size: 6vw;
 }
 
-section {
+article section {
   padding: 3vw 0;
 }
 
-p {
+article p {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 5vw;
+  font-size: 3.5vw;
   line-height: 5.8vw;
   margin: 0;
 }
 
+/* -------------------------------------------------------------------------------- */
+/* Title */
+/* -------------------------------------------------------------------------------- */
+
+.title {
+  text-align: center;
+  font-size: 4vw;
+  font-family: 'Cormorant Garamond', serif;
+}
+
+.title .title-wrapper {
+  margin-top: 15vw;
+}
+
+.title .title-wrapper h1 {
+  text-transform: uppercase;
+  letter-spacing: 0vw;
+  font-size: 13vw;
+  line-height: 8vw;
+  font-weight: 900;
+}
+
+.title .title-wrapper h4 {
+  letter-spacing: 1vw;
+}
+
+.title .instructions {
+  margin-top: 20vw;
+  font-size: 6vw;
+  font-weight: bold;
+}
+
+.title .footer {
+  margin-top: 18vw;
+}
+
+.title .footer h3 {
+  text-transform: uppercase;
+  letter-spacing: 2vw;
+}
+
+/* -------------------------------------------------------------------------------- */
+/* Credits */
+/* -------------------------------------------------------------------------------- */
+
+.credits p {
+  font-size: 3.5vw;
+  font-family: 'Cormorant Garamond', serif;
+}
+
+/* -------------------------------------------------------------------------------- */
+/* Page */
+/* -------------------------------------------------------------------------------- */
+
+.articles {
+  display: none;
+}
+
 .wrapper {
-  padding: 8vw;
+  padding: 4vw;
+}
+
+main {
+  padding-left: 21vw;
+  padding-right: 10vw;
+
+  /* scrolling */
+  /*height: 75%; */
+  /*height: 400px; */
+  overflow-y: scroll;
+  overflow-x: scroll;
+  -webkit-overflow-scrolling: touch;
 }
 
 html {
@@ -50,6 +120,10 @@ html {
   -o-background-size: cover;
   background-size: cover;
 }
+
+/* -------------------------------------------------------------------------------- */
+/* Header */
+/* -------------------------------------------------------------------------------- */
 
 header {
   display: flex;
@@ -69,14 +143,13 @@ header form input {
   -webkit-appearance: none;
 }
 
+/* -------------------------------------------------------------------------------- */
+/* Input */
+/* -------------------------------------------------------------------------------- */
+
 input[name=songNumber] {
   width: 40px;
   text-align: center;
   border: 1px solid #7C7D7D;
   font-size: 16px; /* this prevents phone zooming in */
-}
-
-input[type=submit] {
-  background-color: white;
-  border: 1px solid #7C7D7D;
 }

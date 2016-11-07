@@ -119,20 +119,26 @@
      (format "<style class='lh'>%s</style>" (slurp "src/web/reset.css"))
      (as-> (slurp "src/web/style.css") $
            (string/replace $ #"__BACKGROUND_IMAGE_B64__"
-                           (.encodeToString (Base64/getEncoder) (slurp-bytes "img/background.png")))
+                           (.encodeToString (Base64/getEncoder) (slurp-bytes "img/blank_pages_color_light_cropped.jpg")))
            (format "<style class='lh'>%s</style>" $))
-     (format "<div class='lh wrapper'>%s<main class='main'></main><div class=\"articles\">%s</div></div>"
-             (slurp "src/web/header.html") (lyrics-html))
+     (format "<div class='lh wrapper'>%s<main class='main'></main><div class=\"articles\">%s%s%s%s</div></div>"
+             (slurp "src/web/header.html")
+             (slurp "src/web/title.html")
+             (slurp "src/web/toc.html")
+             (slurp "src/web/credits.html")
+             (lyrics-html))
      (format "<script class='lh'>%s</script>" (slurp "src/web/app.js"))
      "</div></div>"]))
 
 (defn build
   []
   (println (format "[%d] building..." (System/currentTimeMillis)))
-  (pbcopy (gen-html))
+  #_(pbcopy (gen-html))
   (spit "index.html" (gen-html)))
 
 (comment
+
+  (lyrics-html)
 
   (user/go)
 

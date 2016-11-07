@@ -1,3 +1,7 @@
+// ------------------------------------------------------------------------------
+// Removing Squarespace
+// ------------------------------------------------------------------------------
+
 function unsquarespace() {
   // wipe css
   for (var i in document.styleSheets) {
@@ -15,10 +19,18 @@ function unsquarespace() {
   for (var i = 0; i < lhNodes.length; i++) {
     document.body.appendChild(lhNodes[i]);
   }
+
+  // HACK update height for scrolling
+  document.getElementsByClassName('main')[0].style.height = (window.innerHeight * 0.70) + "px";
 }
 
+// ------------------------------------------------------------------------------
+// Updating song
+// ------------------------------------------------------------------------------
+
 // state
-var curSong = 1;
+var curSong = 0;
+//var curSong = -2;
 
 function displaySong(songNumber) {
   console.log('displaySong', songNumber)
@@ -30,7 +42,11 @@ function displaySong(songNumber) {
 
     // update state
     curSong = songNumber;
-
+    if (songNumber < 0) {
+      textInput.value = "#";
+    } else {
+      textInput.value = curSong;
+    }
     console.log('displaySong', 'updating')
 
     // clear old node
@@ -42,6 +58,10 @@ function displaySong(songNumber) {
     main.appendChild(newNode);
   }
 }
+
+// ------------------------------------------------------------------------------
+// Navigation text input
+// ------------------------------------------------------------------------------
 
 var textInput = document.getElementsByClassName('navigation')[0].querySelectorAll("[name=songNumber]")[0]
 
@@ -58,9 +78,57 @@ textInput.onfocus = function (e) {
 textInput.onkeyup = function (e) {
   console.log('onkeyup', e.target.value)
 
-  var nextValue = e.target.value;
+  var nextValue = parseInt(e.target.value);
   displaySong(nextValue);
 }
+
+// ------------------------------------------------------------------------------
+// Swiping
+// http://stackoverflow.com/questions/2264072/detect-a-finger-swipe-through-javascript-on-the-iphone-and-android
+// ------------------------------------------------------------------------------
+
+var xDown = null;
+var yDown = null;
+
+function handleTouchStart(evt) {
+    xDown = evt.touches[0].clientX;
+    yDown = evt.touches[0].clientY;
+};
+
+function handleTouchMove(evt) {
+    if ( ! xDown || ! yDown ) {
+        return;
+    }
+
+    var xUp = evt.touches[0].clientX;
+    var yUp = evt.touches[0].clientY;
+
+    var xDiff = xDown - xUp;
+    var yDiff = yDown - yUp;
+
+    if ( Math.abs( xDiff ) > Math.abs( yDiff ) ) {
+        if ( xDiff > 0 ) {
+          /* left swipe */
+          displaySong(curSong + 1)
+        } else {
+          /* right swipe */
+          displaySong(curSong - 1)
+        }
+    } else {
+        if ( yDiff > 0 ) {
+            /* up swipe */
+        } else {
+            /* down swipe */
+        }
+    }
+    /* reset values */
+    xDown = null;
+    yDown = null;
+};
+
+// ------------------------------------------------------------------------------
+// Entrypoint
+// ------------------------------------------------------------------------------
 
 // start on first page
 displaySong(curSong);
@@ -69,3 +137,6 @@ unsquarespace();
 document.addEventListener("DOMContentLoaded", function(event) {
   unsquarespace();
 });
+
+document.addEventListener('touchstart', handleTouchStart, false);
+document.addEventListener('touchmove', handleTouchMove, false);
