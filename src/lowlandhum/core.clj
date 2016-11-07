@@ -124,9 +124,8 @@
 (defn gen-html
   []
   (string/join
-    ["<meta class='lh' name='viewport' content='width=device-width, initial-scale=1.0'>"
-     "<link class='lh' href=\"https://fonts.googleapis.com/css?family=Cormorant+Garamond|Roboto\" rel=\"stylesheet\">"
-     "<div><div>"
+    ["<link class='lh' href=\"https://fonts.googleapis.com/css?family=Cormorant+Garamond|Roboto\" rel=\"stylesheet\">"
+     "<div><div>" ;; for testing that we strip out squarespace code
      (format "<style class='lh'>%s</style>" (slurp "src/web/reset.css"))
      (as-> (slurp "src/web/style.css") $
            (string/replace $ #"__BACKGROUND_IMAGE_B64__"
@@ -152,11 +151,18 @@
      (format "<script class='lh'>%s</script>" (slurp "src/web/app.js"))
      "</div></div>"]))
 
+(defn write-to-file
+  []
+  (spit "index.html"
+        (format "<html><head>%s</head><body>%s</body></html>"
+                "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">"
+                (gen-html))))
+
 (defn build
   []
   (println (format "[%d] building..." (System/currentTimeMillis)))
   #_(pbcopy (gen-html))
-  (spit "index.html" (gen-html)))
+  (write-to-file))
 
 (comment
 
@@ -166,7 +172,7 @@
   (user/go)
 
   (pbcopy (gen-html))
-  (spit "index.html" (gen-html))
+  (write-to-file)
 
   (hiccup/html
     [:div])
