@@ -8,4 +8,4 @@
 - [x] credits page
 - [x] table of contents page
 - [x] bug: swipe after navigate doesn't work
-- [ ] bug: fix weird characters
+- [x] bug: fix weird characters

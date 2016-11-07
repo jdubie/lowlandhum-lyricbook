@@ -31,14 +31,17 @@
 
 (defn lyrics-content
   []
-  (->>
-    (string/split
-      (string/replace (slurp "lyrics/lyrics.txt")
-                      #"’" "'")
-      #"\n")
+  (as-> (slurp "lyrics/lyrics.txt") $
+
+    (string/replace $ #"[“”]" "\"")
+    (string/replace $ #"[ ]" "")
+
+    (string/replace $ #"’" "'")
+
+    (string/split $ #"\n")
 
     ;; trim
-    (map string/trim)
+    (map string/trim $)
 
     ;; turn into song datastructure
     (reduce
@@ -60,7 +63,7 @@
 
           ;:else
           :else memo))
-      [])
+      [] $)
 
     ;; get rid of leading whitespace
     (map
@@ -71,7 +74,8 @@
           (loop [lines lines]
             (if (not= "" (first lines))
               lines
-              (recur (vec (rest lines))))))))
+              (recur (vec (rest lines)))))))
+      $)
 
     ;; get rid of trailing whitespace
     (map
@@ -82,7 +86,8 @@
           (loop [lines lines]
             (if (not= "" (last lines))
               lines
-              (recur (pop lines)))))))
+              (recur (pop lines))))))
+      $)
 
     ;; split stanzas
     (map
@@ -90,7 +95,8 @@
         (assoc song :lines
                     (mapv
                       #(string/split % #"\n")
-                      (string/split (string/join "\n" lines) #"\n\n")))))))
+                      (string/split (string/join "\n" lines) #"\n\n"))))
+      $)))
 
 (defn lyrics-html
   []
